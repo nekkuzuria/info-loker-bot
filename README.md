@@ -18,34 +18,55 @@ https://github.com/VishwaGauravIn/linkedin-jobs-api/
 cp .env.example .env
 ```
 
-2. get ur discord webhook url.
+2. add your openrouter api key
+
+go to the openroute website:
+https://openrouter.ai/
+
+create an account if you don't have one, then:
+`api keys → new key`
+
+copy the API key and put it in your `.env` file.
+
+example:
+
+```env
+OPENROUTER_API_KEY=your_api_key_here
+```
+
+3. get ur discord webhook url.
 
 go to ur discord server channel:
 `channel settings → integrations → create webhook`
 
 then just copy the webhook url.
 
-3. paste ur discord webhook url in the `.env`
+4. paste ur discord webhook url in the `.env`
+   example:
 
-4. create virtual environment
+```env
+DISCORD_WEBHOOK_URL_LIST=["your-discord-webhook-url-here"]
+```
+
+5. create virtual environment
 
 ```bash
 python3 -m venv .venv
 ```
 
-5. activate the venv
+6. activate the venv
 
 ```bash
 source .venv/bin/activate
 ```
 
-6. install requirements
+7. install requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-7. finally, run the script
+8. finally, run the script
 
 ```bash
 python3 main.py

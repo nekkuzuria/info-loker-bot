@@ -1,51 +1,55 @@
+import os
 from datetime import datetime
-
+import requests
 from discord import send_message
 from crawler import fetch_jobs
 
-SKIP = [
-    # sales / business
-    "sales",
-    "business development",
-    "account",
-    "marketing",
-    "customer",
-    "customer service",
-    "solution",
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-    # non IT engineer
-    "maintenance",
-    "manufacturing",
-    "mechanical",
-    "electrical",
-    "civil",
-    "structural",
-    "project",
-    "construction",
-    "field",
-    "cost control",
+def chunk_list(items, chunk_size):
+    for i in range(0, len(items), chunk_size):
+        yield items[i:i + chunk_size]
 
-    # operational
-    "operator",
-    "technician",
-    "officer",
-    "security",
-    "sourcing",
-    "purchasing",
-    "audit",
-    "auditor",
-    "legal",
-    "economics",
-    "researcher",
+def classify_job(title) -> bool:
+    prompt = f"""
+You are a job classifier.
 
-    # seniority
-    "manager",
-    "director",
-    "head",
-    "lead",
-    "principal",
-    "senior"
-]
+Classify whether this job title matches:
+- Tech related roles (software engineer, quality assurance, security, devops)
+- Entry level / junior / internship only
+- NOT senior, lead, manager, director, head, principal
+
+Return ONLY:
+true
+or
+false
+
+Job title:
+{title}
+"""
+
+    response = requests.post(
+        "https://openrouter.ai/api/v1/chat/completions",
+        headers={
+            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "Content-Type": "application/json"
+        },
+        json={
+            "model": "google/gemma-4-26b-a4b-it:free",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            "temperature": 0,
+            "max_tokens": 2
+        }
+    )
+
+    result = response.json()
+    answer = result["choices"][0]["message"]["content"].strip().lower()
+    return answer == "true"
 
 jobs = fetch_jobs(
     [
@@ -74,8 +78,8 @@ messages_list.append(f"""```text
 ╔════════════════════════════════════════════════════
 ║                  📌 JOB UPDATE
 ╠════════════════════════════════════════════════════
-║ 📅 Tanggal: {today}
-║ Nemu {len(jobs)} jobs from the last 24 hours.
+║ 📅 Date: {today}
+║ These are jobs from the last 24 hours.
 ║
 ║ 🌏 Indonesia
 ║ 💻 Software Engineer • Backend • Fullstack
@@ -90,7 +94,7 @@ messages_list.append(f"""```text
 
 for job in jobs:
     title = job["title"].lower()
-    if any(keyword in title for keyword in SKIP):
+    if not classify_job(title):
         continue
     message = f"""
  **{job["title"]}**
@@ -104,10 +108,6 @@ for job in jobs:
 """
 
     messages_list.append(message)
-
-def chunk_list(items, chunk_size):
-    for i in range(0, len(items), chunk_size):
-        yield items[i:i + chunk_size]
 
 for batch in chunk_list(messages_list, 5):
     final_message = "".join(batch)
