@@ -4,7 +4,7 @@ as someone that often share job vacancy to my friends in discord, i got an idea 
 
 basically, this bot just gets job vacancy from linkedin and integrates it to discord using webhook.
 
-also, big thanks to indian it guy for this incredible project:
+also, big thanks to our indian tech bro for this incredible project:
 https://github.com/VishwaGauravIn/linkedin-jobs-api/
 
 <img width="940" height="756" alt="image" src="https://github.com/user-attachments/assets/09753510-8de6-4845-8bf1-0d2d226a2448" />
