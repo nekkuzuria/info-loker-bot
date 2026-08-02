@@ -7,6 +7,9 @@ basically, this bot just gets job vacancy from linkedin and integrates it to dis
 also, big thanks to indian it guy for this incredible project:
 https://github.com/VishwaGauravIn/linkedin-jobs-api/
 
+<img width="940" height="756" alt="image" src="https://github.com/user-attachments/assets/09753510-8de6-4845-8bf1-0d2d226a2448" />
+
+
 ## how to use?
 
 1. copy `.env.example` as `.env`
