@@ -43,7 +43,7 @@ Job title:
                 }
             ],
             "temperature": 0,
-            "max_tokens": 2
+            "max_tokens": 10
         }
     )
 
