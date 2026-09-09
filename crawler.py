@@ -66,7 +66,7 @@ def crawl_jobs(keyword, location, isRemote=False, pages=3):
 
         if response.status_code == 429:
             print("Rate limited. Waiting...")
-            time.sleep(30)
+            time.sleep(120)
             requests.get(
                 url,
                 params=params,

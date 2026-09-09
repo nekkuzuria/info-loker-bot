@@ -5,38 +5,37 @@ from crawler import fetch_jobs
 
 SKIP = [
     # sales / business
-    "sales",
-    "business development",
-    "account",
-    "marketing",
-    "customer",
-    "customer service",
-    "solution",
+    # "sales",
+    # "business development",
+    # "account",
+    # "marketing",
+    # "customer",
+    # "customer service",
+    # "solution",
 
     # non IT engineer
-    "maintenance",
-    "manufacturing",
-    "mechanical",
-    "electrical",
-    "civil",
-    "structural",
-    "project",
-    "construction",
-    "field",
-    "cost control",
+    # "maintenance",
+    # "manufacturing",
+    # "mechanical",
+    # "electrical",
+    # "civil",
+    # "structural",
+    # "project",
+    # "construction",
+    # "field",
+    # "cost control",
 
     # operational
-    "operator",
-    "technician",
-    "officer",
-    "security",
-    "sourcing",
-    "purchasing",
-    "audit",
-    "auditor",
-    "legal",
-    "economics",
-    "researcher",
+    # "operator",
+    # "technician",
+    # "officer",
+    # "sourcing",
+    # "purchasing",
+    # "audit",
+    # "auditor",
+    # "legal",
+    # "economics",
+    # "researcher",
 
     # seniority
     "manager",
@@ -60,9 +59,10 @@ jobs = fetch_jobs(
         "Machine Learning Engineer",
         "DevOps Engineer",
         "Cloud Engineer",
+        "UI/UX",
     ],
     [
-        "Indonesia",
+        "Indonesia"
     ],
     is_remote=True
 )
@@ -75,11 +75,12 @@ messages_list.append(f"""```text
 ║                  📌 JOB UPDATE
 ╠════════════════════════════════════════════════════
 ║ 📅 Tanggal: {today}
-║ Nemu {len(jobs)} jobs from the last 24 hours.
+║ jobs from the last 24 hours.
 ║
 ║ 🌏 Indonesia
 ║ 💻 Software Engineer • Backend • Fullstack
 ║    • Frontend • Data Engineer • DevOps • QA
+║    •  UI/UX
 ║ 🎓 Internship & Entry Level
 ║
 ║ ℹ️ Note:
